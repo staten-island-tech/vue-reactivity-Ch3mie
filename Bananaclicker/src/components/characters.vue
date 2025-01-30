@@ -8,11 +8,11 @@ import { reactive, computed } from 'vue'
 const characters = reactive([
   {
     name: 'Warrior',
-    health: 100,
+    health: -100,
     attack: 80,
     defense: 90,
     speed: 60,
-    magic: 30,
+    magic: 0,
     equippedWeapon: null,
   },
   {
