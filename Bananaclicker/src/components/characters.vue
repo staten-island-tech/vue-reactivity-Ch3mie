@@ -5,7 +5,8 @@
       <div
         v-for="character in characters"
         :key="character.name"
-        class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center"
+        class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
+        @click="animateCharacter($event)"
       >
         <img
           :src="character.image || 'https://via.placeholder.com/150'"
@@ -98,7 +99,7 @@ const characters = reactive([
     speed: 85,
     magic: 90,
     equippedWeapon: null,
-    image: 'archer.png',
+    image: 'yone.webp',
   },
   {
     name: 'Alchemist',
@@ -108,17 +109,17 @@ const characters = reactive([
     speed: 75,
     magic: 115,
     equippedWeapon: null,
-    image: 'archer.png',
+    image: 'monkey.jfif',
   },
   {
     name: 'Goku',
     health: 99999999999,
     attack: 999999999999999,
     defense: 99999999999,
-    speed: 999999999999999,
+    speed: 999,
     magic: 0,
     equippedWeapon: null,
-    image: 'archer.png',
+    image: 'goku.jpg',
   },
   {
     name: 'Dylan Jiang The Hobo',
