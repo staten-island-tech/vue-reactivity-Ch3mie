@@ -8,36 +8,19 @@
         class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
         @click="animateCharacter($event)"
       >
-        <img
-          :src="character.image || 'https://via.placeholder.com/150'"
-          alt="Character Image"
-          class="w-32 h-32 rounded-full border-4 border-gray-600 mb-4"
-        />
-        <h2 class="text-xl font-semibold">{{ character.name }}</h2>
-        <p class="text-gray-400">
-          Health: <span class="text-white">{{ character.health }}</span>
-        </p>
-        <p class="text-gray-400">
-          Attack: <span class="text-white">{{ character.attack }}</span>
-        </p>
-        <p class="text-gray-400">
-          Defense: <span class="text-white">{{ character.defense }}</span>
-        </p>
-        <p class="text-gray-400">
-          Speed: <span class="text-white">{{ character.speed }}</span>
-        </p>
-        <p class="text-gray-400">
-          Magic: <span class="text-white">{{ character.magic }}</span>
-        </p>
-        <p class="text-gray-400">
-          Equipped Weapon: <span class="text-white">{{ character.equippedWeapon || 'None' }}</span>
-        </p>
+        <div>
+          <CharacterImage :character="character" />
+        </div>
+        <CharacterStats :character="character" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import CharacterImage from './CharacterImage.vue'
+import CharacterStats from './CharacterStats.vue'
+
 import { reactive } from 'vue'
 
 const characters = reactive([

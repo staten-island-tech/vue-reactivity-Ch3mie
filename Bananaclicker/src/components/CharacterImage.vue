@@ -8,6 +8,15 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  character: {
+    type: Object,
+    required: true,
+  },
+})
+</script>
 
 <style scoped></style>
