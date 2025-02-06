@@ -1,12 +1,11 @@
 <template>
-  <form @submit="handleSubmit">
+  <form @submit="selection">
     <button type="submit">Submit</button>
   </form>
 </template>
 
 <script setup>
-const handleSubmit = (event) => {
+const selection = (event) => {
   event.preventDefault()
-  alert('Form submitted without refreshing!')
 }
 </script>
