@@ -12,6 +12,7 @@
           <CharacterImage :character="character" />
         </div>
         <CharacterStats :character="character" />
+        <ChooseCharacter @click="selection(character)" :character="character" />
       </div>
     </div>
   </div>
@@ -20,8 +21,33 @@
 <script setup>
 import CharacterImage from './CharacterImage.vue'
 import CharacterStats from './CharacterStats.vue'
+import ChooseCharacter from './ChooseCharacter.vue'
 
 import { reactive } from 'vue'
+
+const selectedCharacter = reactive({
+  name: '',
+  health: 0,
+  attack: 0,
+  defense: 0,
+  speed: 0,
+  magic: 0,
+  equippedWeapon: null,
+  image: '',
+})
+
+const selection = (character) => {
+  selectedCharacter.name = character.name
+  selectedCharacter.health = character.health
+  selectedCharacter.attack = character.attack
+  selectedCharacter.defense = character.defense
+  selectedCharacter.speed = character.speed
+  selectedCharacter.magic = character.magic
+  selectedCharacter.equippedWeapon = character.equippedWeapon
+  selectedCharacter.image = character.image
+
+  console.log(selectedCharacter)
+}
 
 const characters = reactive([
   {
