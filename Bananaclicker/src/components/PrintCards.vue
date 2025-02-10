@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto p-6">
+  <div ref="container" class="container mx-auto p-6">
     <h1 class="text-3xl font-bold mb-6 text-center">Characters</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
@@ -12,20 +12,32 @@
           <CharacterImage :character="character" />
         </div>
         <CharacterStats :character="character" />
-        <ChooseCharacter @click="selection(character)" :character="character" />
+        <ChooseCharacter
+          @click="
+            () => {
+              selection(character)
+              clearHtml()
+            }
+          "
+          :character="character"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import CharacterImage from './CharacterImage.vue'
 import CharacterStats from './CharacterStats.vue'
 import ChooseCharacter from './ChooseCharacter.vue'
+import { characters, selection } from '@/main'
 
-import { characters } from '@/main'
-import { selectedCharacter } from '@/main'
-import { selection } from '@/main'
+const container = ref(null) // Define container reference
+
+const clearHtml = () => {
+  if (container.value) {
+    container.value.innerHTML = '' // Clears the container div content
+  }
+}
 </script>
-
-<style scoped></style>

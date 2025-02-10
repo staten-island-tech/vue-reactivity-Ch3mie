@@ -9,6 +9,7 @@
 
 <script setup>
 import characters from './characters.vue'
+
 const selection = (event) => {
   event.preventDefault()
   console.log(characters.name)

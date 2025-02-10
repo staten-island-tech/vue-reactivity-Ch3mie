@@ -128,3 +128,36 @@ export const characters = reactive([
     image: 'Dylan.jpeg',
   },
 ])
+
+export const weapons = [
+  {
+    name: 'Small Sword',
+    buffs: { attack: 15, speed: 10, defense: 0, magic: 0, health: 0 },
+    image: 'doomslayer.webp',
+  },
+  {
+    name: 'Arcane Staff of Darkness',
+    buffs: { attack: 0, speed: 0, defense: 0, magic: 20, health: 5 },
+    image: 'staff.webp',
+  },
+  {
+    name: 'Frostborn Dagger of the Arctic',
+    buffs: { attack: 10, speed: 20, defense: 0, magic: 0, health: 0 },
+    image: 'knife.webp',
+  },
+  {
+    name: 'Colony of the United Kingdom Shield',
+    buffs: { attack: 0, speed: 0, defense: 25, magic: 0, health: 10 },
+    image: 'Shield.webp',
+  },
+  {
+    name: 'Gun',
+    buffs: { attack: 12, speed: 0, defense: 0, magic: 18, health: 0 },
+    image: 'gun.png',
+  },
+  {
+    name: 'Legendary Warhammer of Runeterra',
+    buffs: { attack: 20, speed: 0, defense: 15, magic: 0, health: 0 },
+    image: 'hammer.png',
+  },
+]
