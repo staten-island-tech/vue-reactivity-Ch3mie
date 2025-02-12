@@ -21,7 +21,7 @@
         :key="weapon.name"
         class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
       >
-        <WeaponsCards :weapon="weapon" />
+        <WeaponsCards :weapon=""/>
       </div>
     </div>
   </div>
