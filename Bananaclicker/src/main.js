@@ -36,6 +36,22 @@ export const selection = (character) => {
   console.log(selectedCharacter)
 }
 
+export const wselection = (equippedWeapon) => {
+  if (!selectedCharacter) {
+    console.error('No character selected.')
+    return
+  }
+
+  selectedCharacter.equippedWeapon = equippedWeapon.name
+  selectedCharacter.attack += equippedWeapon.buffs.attack
+  selectedCharacter.speed += equippedWeapon.buffs.speed
+  selectedCharacter.defense += equippedWeapon.buffs.defense
+  selectedCharacter.magic += equippedWeapon.buffs.magic
+  selectedCharacter.health += equippedWeapon.buffs.health
+
+  console.log(selectedCharacter)
+}
+
 export const characters = reactive([
   {
     name: 'Warrior',
@@ -141,9 +157,9 @@ export const weapons = [
     image: 'staff.webp',
   },
   {
-    name: 'Frostborn Dagger of the Arctic',
+    name: 'Frostborn Dagger of the Arctic Warriors',
     buffs: { attack: 10, speed: 20, defense: 0, magic: 0, health: 0 },
-    image: 'knife.webp',
+    image: 'knife.png',
   },
   {
     name: 'Colony of the United Kingdom Shield',
@@ -156,7 +172,7 @@ export const weapons = [
     image: 'gun.png',
   },
   {
-    name: 'Legendary Warhammer of Runeterra',
+    name: 'The Lost Fabled Legendary Warhammer of Home Depot',
     buffs: { attack: 20, speed: 0, defense: 15, magic: 0, health: 0 },
     image: 'hammer.png',
   },

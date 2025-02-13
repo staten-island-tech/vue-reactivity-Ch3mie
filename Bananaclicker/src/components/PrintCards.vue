@@ -4,6 +4,7 @@
       {{ showWeapons ? 'Weapons' : 'Characters' }}
     </h1>
 
+    <!-- Show characters only if weapons are not selected -->
     <div v-if="!showWeapons" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="character in characters"
@@ -15,13 +16,16 @@
         <ChooseCharacter @click="selectCharacter(character)" :character="character" />
       </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- Show weapons only after a character is selected -->
+    <div v-if="showWeapons" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="weapon in weapons"
         :key="weapon.name"
         class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
       >
         <WeaponsCards :weapon="weapon" />
+        <TheWeapons :weapon="weapon" @click="wselectWeapon(weapon)" />
       </div>
     </div>
   </div>
@@ -33,13 +37,17 @@ import CharacterImage from './CharacterImage.vue'
 import CharacterStats from './CharacterStats.vue'
 import ChooseCharacter from './ChooseCharacter.vue'
 import WeaponsCards from './WeaponsCards.vue'
-import { weapons } from '@/main'
-import { characters, selection } from '@/main'
+import TheWeapons from './TheWeapons.vue'
+import { weapons, characters, selection } from '@/main'
 
 const showWeapons = ref(false) // Track whether to show weapons
 
 const selectCharacter = (character) => {
   selection(character) // Call selection function
-  showWeapons.value = true // Hide characters and show weapons
+  showWeapons.value = true // Switch to weapons view
+}
+
+const selectWeapon = (weapon) => {
+  wselection(weapon)
 }
 </script>
