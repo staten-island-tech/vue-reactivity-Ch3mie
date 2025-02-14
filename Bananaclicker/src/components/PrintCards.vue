@@ -1,11 +1,14 @@
 <template>
   <div class="container mx-auto p-6">
     <h1 class="text-3xl font-bold mb-6 text-center">
-      {{ showWeapons ? 'Weapons' : 'Characters' }}
+      {{ showStats ? 'Character Stats' : showWeapons ? 'Weapons' : 'Characters' }}
     </h1>
 
-    <!-- Show characters only if weapons are not selected -->
-    <div v-if="!showWeapons" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Character selection -->
+    <div
+      v-if="!showWeapons && !showStats"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
       <div
         v-for="character in characters"
         :key="character.name"
@@ -17,7 +20,7 @@
       </div>
     </div>
 
-    <!-- Show weapons only after a character is selected -->
+    <!-- Weapon selection -->
     <div v-if="showWeapons" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="weapon in weapons"
@@ -25,8 +28,15 @@
         class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
       >
         <WeaponsCards :weapon="weapon" />
-        <TheWeapons :weapon="weapon" @click="wselectWeapon(weapon)" />
+        <TheWeapons :weapon="weapon" @click="selectWeapon(weapon)" />
       </div>
+    </div>
+
+    <div
+      v-if="showStats"
+      class="bg-gray-900 text-white p-8 rounded-2xl shadow-lg text-center max-w-md mx-auto"
+    >
+      <FinalCharacter :selectCharacter="selectCharacter" />
     </div>
   </div>
 </template>
@@ -38,16 +48,27 @@ import CharacterStats from './CharacterStats.vue'
 import ChooseCharacter from './ChooseCharacter.vue'
 import WeaponsCards from './WeaponsCards.vue'
 import TheWeapons from './TheWeapons.vue'
-import { weapons, characters, selection } from '@/main'
+import { weapons, characters, selection, wselection, selectedCharacter } from '@/main'
+import FinalCharacter from './FinalCharacter.vue'
 
-const showWeapons = ref(false) // Track whether to show weapons
+const showWeapons = ref(false)
+const showStats = ref(false)
 
 const selectCharacter = (character) => {
-  selection(character) // Call selection function
-  showWeapons.value = true // Switch to weapons view
+  selection(character)
+  selectedCharacter.name = character.name
+  selectedCharacter.health = character.health
+  selectedCharacter.attack = character.attack
+  selectedCharacter.defense = character.defense
+  selectedCharacter.speed = character.speed
+  selectedCharacter.magic = character.magic
+  selectedCharacter.image = character.image
+  showWeapons.value = true
 }
 
 const selectWeapon = (weapon) => {
   wselection(weapon)
+  showWeapons.value = false
+  showStats.value = true
 }
 </script>

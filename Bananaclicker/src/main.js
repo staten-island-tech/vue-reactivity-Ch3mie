@@ -36,20 +36,19 @@ export const selection = (character) => {
   console.log(selectedCharacter)
 }
 
-export const wselection = (equippedWeapon) => {
-  if (!selectedCharacter) {
-    console.error('No character selected.')
-    return
+export const wselection = (weapon) => {
+  if (!selectedCharacter.name) return
+
+  selectedCharacter.equippedWeapon = weapon.name
+  selectedCharacter.buffedStats = {
+    health: selectedCharacter.health + weapon.buffs.health,
+    attack: selectedCharacter.attack + weapon.buffs.attack,
+    defense: selectedCharacter.defense + weapon.buffs.defense,
+    speed: selectedCharacter.speed + weapon.buffs.speed,
+    magic: selectedCharacter.magic + weapon.buffs.magic,
   }
 
-  selectedCharacter.equippedWeapon = equippedWeapon.name
-  selectedCharacter.attack += equippedWeapon.buffs.attack
-  selectedCharacter.speed += equippedWeapon.buffs.speed
-  selectedCharacter.defense += equippedWeapon.buffs.defense
-  selectedCharacter.magic += equippedWeapon.buffs.magic
-  selectedCharacter.health += equippedWeapon.buffs.health
-
-  console.log(selectedCharacter)
+  console.log('Character with weapon:', selectedCharacter)
 }
 
 export const characters = reactive([
