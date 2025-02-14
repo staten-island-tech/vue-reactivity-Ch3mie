@@ -40,13 +40,17 @@ export const wselection = (weapon) => {
   if (!selectedCharacter.name) return
 
   selectedCharacter.equippedWeapon = weapon.name
-  selectedCharacter.buffedStats = {
-    health: selectedCharacter.health + weapon.buffs.health,
-    attack: selectedCharacter.attack + weapon.buffs.attack,
-    defense: selectedCharacter.defense + weapon.buffs.defense,
-    speed: selectedCharacter.speed + weapon.buffs.speed,
-    magic: selectedCharacter.magic + weapon.buffs.magic,
-  }
+  selectedCharacter.equippedWeaponImage = weapon.image // Store weapon image
+
+  // Ensure the character image stays the same
+  selectedCharacter.image = selectedCharacter.image
+
+  // Directly modify the reactive object's properties to ensure Vue tracks changes
+  selectedCharacter.health += weapon.buffs.health
+  selectedCharacter.attack += weapon.buffs.attack
+  selectedCharacter.defense += weapon.buffs.defense
+  selectedCharacter.speed += weapon.buffs.speed
+  selectedCharacter.magic += weapon.buffs.magic
 
   console.log('Character with weapon:', selectedCharacter)
 }

@@ -16,7 +16,7 @@
       >
         <CharacterImage :character="character" />
         <CharacterStats :character="character" />
-        <ChooseCharacter @click="selectCharacter(character)" :character="character" />
+        <ChooseCharacter @click="selectCharacter(character)" />
       </div>
     </div>
 
@@ -28,15 +28,16 @@
         class="bg-gray-800 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:shadow-2xl"
       >
         <WeaponsCards :weapon="weapon" />
-        <TheWeapons :weapon="weapon" @click="selectWeapon(weapon)" />
+        <TheWeapons @click="selectWeapon(weapon)" />
       </div>
     </div>
 
+    <!-- Final Character Stats -->
     <div
       v-if="showStats"
       class="bg-gray-900 text-white p-8 rounded-2xl shadow-lg text-center max-w-md mx-auto"
     >
-      <FinalCharacter :selectCharacter="selectCharacter" />
+      <FinalCharacter />
     </div>
   </div>
 </template>
@@ -48,7 +49,7 @@ import CharacterStats from './CharacterStats.vue'
 import ChooseCharacter from './ChooseCharacter.vue'
 import WeaponsCards from './WeaponsCards.vue'
 import TheWeapons from './TheWeapons.vue'
-import { weapons, characters, selection, wselection, selectedCharacter } from '@/main'
+import { weapons, characters, selection, wselection } from '@/main'
 import FinalCharacter from './FinalCharacter.vue'
 
 const showWeapons = ref(false)
@@ -56,13 +57,6 @@ const showStats = ref(false)
 
 const selectCharacter = (character) => {
   selection(character)
-  selectedCharacter.name = character.name
-  selectedCharacter.health = character.health
-  selectedCharacter.attack = character.attack
-  selectedCharacter.defense = character.defense
-  selectedCharacter.speed = character.speed
-  selectedCharacter.magic = character.magic
-  selectedCharacter.image = character.image
   showWeapons.value = true
 }
 
