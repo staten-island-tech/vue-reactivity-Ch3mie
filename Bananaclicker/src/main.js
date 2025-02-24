@@ -1,17 +1,15 @@
+// main.js
 import './assets/main.css'
 
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
-
 app.use(router)
-
 app.mount('#app')
 
-import { reactive } from 'vue'
-
+// Reactive character selection
 export const selectedCharacter = reactive({
   name: '',
   health: 0,
@@ -21,40 +19,40 @@ export const selectedCharacter = reactive({
   magic: 0,
   equippedWeapon: null,
   image: '',
+  equippedWeaponImage: '',
 })
 
+// Function to select a character
 export const selection = (character) => {
-  selectedCharacter.name = character.name
-  selectedCharacter.health = character.health
-  selectedCharacter.attack = character.attack
-  selectedCharacter.defense = character.defense
-  selectedCharacter.speed = character.speed
-  selectedCharacter.magic = character.magic
-  selectedCharacter.equippedWeapon = character.equippedWeapon
-  selectedCharacter.image = character.image
-
+  Object.assign(selectedCharacter, character) // More concise way to update
+  selectedCharacter.equippedWeaponImage = '' // Reset weapon image on character change
   console.log(selectedCharacter)
 }
 
+// Function to select a weapon
 export const wselection = (weapon) => {
   if (!selectedCharacter.name) return
 
   selectedCharacter.equippedWeapon = weapon.name
-  selectedCharacter.equippedWeaponImage = weapon.image // Store weapon image
+  selectedCharacter.equippedWeaponImage = weapon.image
 
-  // Ensure the character image stays the same
-  selectedCharacter.image = selectedCharacter.image
+  // Reset stats before applying buffs
+  selectedCharacter.health -= weapon.buffs.health || 0
+  selectedCharacter.attack -= weapon.buffs.attack || 0
+  selectedCharacter.defense -= weapon.buffs.defense || 0
+  selectedCharacter.speed -= weapon.buffs.speed || 0
+  selectedCharacter.magic -= weapon.buffs.magic || 0
 
-  // Directly modify the reactive object's properties to ensure Vue tracks changes
-  selectedCharacter.health += weapon.buffs.health
-  selectedCharacter.attack += weapon.buffs.attack
-  selectedCharacter.defense += weapon.buffs.defense
-  selectedCharacter.speed += weapon.buffs.speed
-  selectedCharacter.magic += weapon.buffs.magic
+  selectedCharacter.health += weapon.buffs.health || 0
+  selectedCharacter.attack += weapon.buffs.attack || 0
+  selectedCharacter.defense += weapon.buffs.defense || 0
+  selectedCharacter.speed += weapon.buffs.speed || 0
+  selectedCharacter.magic += weapon.buffs.magic || 0
 
   console.log('Character with weapon:', selectedCharacter)
 }
 
+// Characters List
 export const characters = reactive([
   {
     name: 'Warrior',
@@ -63,19 +61,9 @@ export const characters = reactive([
     defense: 100,
     speed: 80,
     magic: 10,
-    equippedWeapon: null,
     image: 'steve.webp',
   },
-  {
-    name: 'Mage',
-    health: 80,
-    attack: 60,
-    defense: 50,
-    speed: 50,
-    magic: 160,
-    equippedWeapon: null,
-    image: 'friren.png',
-  },
+  { name: 'Mage', health: 80, attack: 60, defense: 50, speed: 50, magic: 160, image: 'friren.png' },
   {
     name: 'Assassin',
     health: 80,
@@ -83,19 +71,9 @@ export const characters = reactive([
     defense: 30,
     speed: 150,
     magic: 30,
-    equippedWeapon: null,
     image: 'hit.webp',
   },
-  {
-    name: 'Tank',
-    health: 160,
-    attack: 50,
-    defense: 130,
-    speed: 20,
-    magic: 40,
-    equippedWeapon: null,
-    image: 'tank.png',
-  },
+  { name: 'Tank', health: 160, attack: 50, defense: 130, speed: 20, magic: 40, image: 'tank.png' },
   {
     name: 'Archer',
     health: 80,
@@ -103,7 +81,6 @@ export const characters = reactive([
     defense: 50,
     speed: 120,
     magic: 40,
-    equippedWeapon: null,
     image: 'archer.png',
   },
   {
@@ -113,7 +90,6 @@ export const characters = reactive([
     defense: 50,
     speed: 85,
     magic: 90,
-    equippedWeapon: null,
     image: 'yone.webp',
   },
   {
@@ -123,7 +99,6 @@ export const characters = reactive([
     defense: 60,
     speed: 75,
     magic: 115,
-    equippedWeapon: null,
     image: 'monkey.jfif',
   },
   {
@@ -133,7 +108,6 @@ export const characters = reactive([
     defense: 99999999999,
     speed: 999,
     magic: 0,
-    equippedWeapon: null,
     image: 'goku.jpg',
   },
   {
@@ -143,11 +117,11 @@ export const characters = reactive([
     defense: 40,
     speed: 50,
     magic: 0,
-    equippedWeapon: null,
     image: 'Dylan.jpeg',
   },
 ])
 
+// Weapons List
 export const weapons = [
   {
     name: 'Small Sword',

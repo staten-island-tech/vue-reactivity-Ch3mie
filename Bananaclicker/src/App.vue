@@ -5,12 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <div class="bg-cover bg-center min-h-screen" style="background-image: url('/backdrop.jpg')">
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <div class="wrapper"></div>
 
     <RouterView />
   </div>
